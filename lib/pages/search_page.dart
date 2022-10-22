@@ -48,67 +48,87 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Theme.of(context).primaryColor,
-        title: const Text(
-          "Search",
-          style: TextStyle(
-              fontSize: 27, fontWeight: FontWeight.bold, color: Colors.white),
-        ),
-      ),
-      body: Column(
-        children: [
-          Container(
-            color: Colors.red[400],
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: searchController,
-                    style: const TextStyle(color: Colors.white),
-                    cursorColor: Colors.white,
-                    decoration: const InputDecoration(
-                        border: InputBorder.none,
-                        hintText: "Search Groups...",
-                        hintStyle:
-                            TextStyle(color: Colors.black54, fontSize: 16)),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    initiateSearchMethod();
-                  },
-                  child: Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(40),
-                    ),
-                    child: const Icon(
-                      Icons.search,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
+    return Container(
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              stops: [
+                0.1,
+                0.2,
+                0.8,
+                0.9
               ],
-            ),
+              colors: [
+                Color.fromARGB(189, 49, 46, 46),
+                Colors.grey.shade900,
+                Color.fromARGB(162, 97, 97, 97),
+                Color.fromARGB(188, 90, 84, 84),
+              ]),
+        ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          centerTitle: true,
+          elevation: 0,
+          backgroundColor: Theme.of(context).primaryColor,
+          title: const Text(
+            "Search",
+            style: TextStyle(
+                fontSize: 27, fontWeight: FontWeight.bold, color: Colors.white),
           ),
-          const SizedBox(
-            height: 10,
-          ),
-          isLoading
-              ? Center(
-                  child: CircularProgressIndicator(
-                    color: Theme.of(context).primaryColor,
+        ),
+        body: Column(
+          children: [
+            Container(
+              color: Colors.red[400],
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: searchController,
+                      style: const TextStyle(color: Colors.white),
+                      cursorColor: Colors.white,
+                      decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          hintText: "Search Groups...",
+                          hintStyle:
+                              TextStyle(color: Colors.black54, fontSize: 16)),
+                    ),
                   ),
-                )
-              : groupList(),
-        ],
+                  GestureDetector(
+                    onTap: () {
+                      initiateSearchMethod();
+                    },
+                    child: Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(40),
+                      ),
+                      child: const Icon(
+                        Icons.search,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            isLoading
+                ? Center(
+                    child: CircularProgressIndicator(
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  )
+                : groupList(),
+          ],
+        ),
       ),
     );
   }

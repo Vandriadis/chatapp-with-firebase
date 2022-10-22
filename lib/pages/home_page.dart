@@ -63,160 +63,180 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-              onPressed: () {
-                nextScreen(context, const SearchPage());
-              },
-              icon: const Icon(Icons.search))
-        ],
-        elevation: 0,
-        backgroundColor: Theme.of(context).primaryColor,
-        centerTitle: true,
-        title: const Text(
-          "Groups",
-          style: TextStyle(
-            fontSize: 27,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
+    return Container(
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              stops: [
+                0.1,
+                0.2,
+                0.8,
+                0.9
+              ],
+              colors: [
+                Color.fromARGB(189, 49, 46, 46),
+                Colors.grey.shade900,
+                Color.fromARGB(162, 97, 97, 97),
+                Color.fromARGB(188, 90, 84, 84),
+              ]),
+        ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          actions: [
+            IconButton(
+                onPressed: () {
+                  nextScreen(context, const SearchPage());
+                },
+                icon: const Icon(Icons.search))
+          ],
+          elevation: 0,
+          backgroundColor: Theme.of(context).primaryColor,
+          centerTitle: true,
+          title: const Text(
+            "Groups",
+            style: TextStyle(
+              fontSize: 27,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
           ),
         ),
-      ),
-      drawer: Drawer(
-        backgroundColor: Colors.grey[800],
-        child: ListView(
-          padding: const EdgeInsets.symmetric(vertical: 50),
-          children: <Widget>[
-            Icon(
-              Icons.account_circle,
-              size: 150,
-              color: Theme.of(context).primaryColor,
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Text(
-              userName,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            const Divider(
-              height: 2,
-            ),
-            ListTile(
-              onTap: () {},
-              selectedColor: Theme.of(context).primaryColor,
-              selected: true,
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 5,
+        drawer: Drawer(
+          backgroundColor: Colors.grey[900],
+          child: ListView(
+            padding: const EdgeInsets.symmetric(vertical: 50),
+            children: <Widget>[
+              Icon(
+                Icons.account_circle,
+                size: 150,
+                color: Theme.of(context).primaryColor,
               ),
-              leading: const Icon(Icons.group),
-              title: const Text(
-                "Groups",
-                style: TextStyle(
-                  color: Colors.white,
+              const SizedBox(
+                height: 15,
+              ),
+              Text(
+                userName,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              const Divider(
+                height: 2,
+              ),
+              ListTile(
+                onTap: () {},
+                selectedColor: Theme.of(context).primaryColor,
+                selected: true,
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 5,
+                ),
+                leading: const Icon(Icons.group),
+                title: const Text(
+                  "Groups",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
               ),
-            ),
-            ListTile(
-              iconColor: Colors.grey[600],
-              onTap: () {
-                nextScreenReplace(
-                    context,
-                    ProfilePage(
-                      userName: userName,
-                      email: email,
-                    ));
-              },
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 5,
-              ),
-              leading: const Icon(Icons.account_circle),
-              title: const Text(
-                "Profile",
-                style: TextStyle(
-                  color: Colors.white,
+              ListTile(
+                iconColor: Colors.grey[600],
+                onTap: () {
+                  nextScreenReplace(
+                      context,
+                      ProfilePage(
+                        userName: userName,
+                        email: email,
+                      ));
+                },
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 5,
+                ),
+                leading: const Icon(Icons.account_circle),
+                title: const Text(
+                  "Profile",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
               ),
-            ),
-            ListTile(
-              iconColor: Colors.grey[600],
-              onTap: () async {
-                showDialog(
-                    barrierDismissible: false,
-                    context: context,
-                    builder: ((context) {
-                      return AlertDialog(
-                        backgroundColor: Colors.grey[800],
-                        title: const Text(
-                          "Logout",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        content: const Text(
-                          "Are you sure?",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        actions: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.cancel_outlined,
-                              color: Colors.red,
-                            ),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
+              ListTile(
+                iconColor: Colors.grey[600],
+                onTap: () async {
+                  showDialog(
+                      barrierDismissible: false,
+                      context: context,
+                      builder: ((context) {
+                        return AlertDialog(
+                          backgroundColor: Colors.grey[800],
+                          title: const Text(
+                            "Logout",
+                            style: TextStyle(color: Colors.white),
                           ),
-                          IconButton(
-                            icon: const Icon(
-                              Icons.done_outline_rounded,
-                              color: Colors.green,
-                            ),
-                            onPressed: () async {
-                              await authService.signOut();
-                              Navigator.of(context).pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                      builder: (context) => const LoginPage()),
-                                  (route) => false);
-                            },
+                          content: const Text(
+                            "Are you sure?",
+                            style: TextStyle(color: Colors.white),
                           ),
-                        ],
-                      );
-                    }));
-              },
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 5,
-              ),
-              leading: const Icon(Icons.exit_to_app_rounded),
-              title: const Text(
-                "Logout",
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontWeight: FontWeight.w600,
+                          actions: [
+                            IconButton(
+                              icon: const Icon(
+                                Icons.cancel_outlined,
+                                color: Colors.red,
+                              ),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                            IconButton(
+                              icon: const Icon(
+                                Icons.done_outline_rounded,
+                                color: Colors.green,
+                              ),
+                              onPressed: () async {
+                                await authService.signOut();
+                                Navigator.of(context).pushAndRemoveUntil(
+                                    MaterialPageRoute(
+                                        builder: (context) => const LoginPage()),
+                                    (route) => false);
+                              },
+                            ),
+                          ],
+                        );
+                      }));
+                },
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 5,
+                ),
+                leading: const Icon(Icons.exit_to_app_rounded),
+                title: const Text(
+                  "Logout",
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-      body: groupList(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          popUpDialog(context);
-        },
-        elevation: 0,
-        backgroundColor: Theme.of(context).primaryColor,
-        child: const Icon(Icons.group_add_rounded),
+        body: groupList(),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            popUpDialog(context);
+          },
+          elevation: 0,
+          backgroundColor: Theme.of(context).primaryColor,
+          child: const Icon(Icons.group_add_rounded),
+        ),
       ),
     );
   }

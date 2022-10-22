@@ -4,9 +4,11 @@ class MessageTile extends StatefulWidget {
   final String message;
   final String sender;
   final bool sentByMe;
+  // final DateTime time;
 
   const MessageTile(
       {Key? key,
+      // required this.time,
       required this.message,
       required this.sender,
       required this.sentByMe})

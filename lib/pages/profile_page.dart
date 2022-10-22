@@ -19,192 +19,212 @@ class _ProfilePageState extends State<ProfilePage> {
   AuthService authService = AuthService();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColor,
-        elevation: 0,
-        title: const Text(
-          "Profile",
-          style: TextStyle(color: Colors.white),
+    return Container(
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              stops: [
+                0.1,
+                0.2,
+                0.8,
+                0.9
+              ],
+              colors: [
+                Color.fromARGB(189, 49, 46, 46),
+                Colors.grey.shade900,
+                Color.fromARGB(162, 97, 97, 97),
+                Color.fromARGB(188, 90, 84, 84),
+              ]),
         ),
-        centerTitle: true,
-      ),
-      drawer: Drawer(
-        backgroundColor: Colors.grey[800],
-        child: ListView(
-          padding: const EdgeInsets.symmetric(vertical: 50),
-          children: <Widget>[
-            Icon(
-              Icons.account_circle,
-              size: 150,
-              color: Theme.of(context).primaryColor,
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Text(
-              widget.userName,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            const Divider(
-              height: 2,
-            ),
-            ListTile(
-              iconColor: Colors.grey[600],
-              onTap: () {
-                nextScreen(context, const HomePage());
-              },
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 5,
-              ),
-              leading: const Icon(Icons.group),
-              title: const Text(
-                "Groups",
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-            ),
-            ListTile(
-              iconColor: Colors.grey[600],
-              onTap: () {},
-              selectedColor: Theme.of(context).primaryColor,
-              selected: true,
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 5,
-              ),
-              leading: const Icon(Icons.account_circle),
-              title: const Text(
-                "Profile",
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-            ),
-            ListTile(
-              iconColor: Colors.grey[600],
-              onTap: () async {
-                showDialog(
-                    barrierDismissible: false,
-                    context: context,
-                    builder: ((context) {
-                      return AlertDialog(
-                        backgroundColor: Colors.grey[800],
-                        title: const Text(
-                          "Logout",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        content: const Text(
-                          "Are you sure?",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        actions: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.cancel_outlined,
-                              color: Colors.red,
-                            ),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                          ),
-                          IconButton(
-                            icon: const Icon(
-                              Icons.done_outline_rounded,
-                              color: Colors.green,
-                            ),
-                            onPressed: () async {
-                              await authService.signOut();
-                              Navigator.of(context).pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                      builder: (context) => const LoginPage()),
-                                  (route) => false);
-                            },
-                          ),
-                        ],
-                      );
-                    }));
-              },
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 5,
-              ),
-              leading: const Icon(Icons.exit_to_app_rounded),
-              title: const Text(
-                "Logout",
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-          ],
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).primaryColor,
+          elevation: 0,
+          title: const Text(
+            "Profile",
+            style: TextStyle(color: Colors.white),
+          ),
+          centerTitle: true,
         ),
-      ),
-      body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 170),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Icon(
-              Icons.account_circle,
-              size: 200,
-              color: Theme.of(context).primaryColor,
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  "Full Name",
+        drawer: Drawer(
+          backgroundColor: Colors.grey[900],
+          child: ListView(
+            padding: const EdgeInsets.symmetric(vertical: 50),
+            children: <Widget>[
+              Icon(
+                Icons.account_circle,
+                size: 150,
+                color: Theme.of(context).primaryColor,
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Text(
+                widget.userName,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              const Divider(
+                height: 2,
+              ),
+              ListTile(
+                iconColor: Colors.grey[600],
+                onTap: () {
+                  nextScreen(context, const HomePage());
+                },
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 5,
+                ),
+                leading: const Icon(Icons.group),
+                title: const Text(
+                  "Groups",
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 17,
                   ),
                 ),
-                Text(
-                  widget.userName,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 17,
-                  ),
+              ),
+              ListTile(
+                iconColor: Colors.grey[600],
+                onTap: () {},
+                selectedColor: Theme.of(context).primaryColor,
+                selected: true,
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 5,
                 ),
-              ],
-            ),
-            const Divider(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  "Email",
+                leading: const Icon(Icons.account_circle),
+                title: const Text(
+                  "Profile",
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 17,
                   ),
                 ),
-                Text(
-                  widget.email,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 17,
+              ),
+              ListTile(
+                iconColor: Colors.grey[600],
+                onTap: () async {
+                  showDialog(
+                      barrierDismissible: false,
+                      context: context,
+                      builder: ((context) {
+                        return AlertDialog(
+                          backgroundColor: Colors.grey[800],
+                          title: const Text(
+                            "Logout",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          content: const Text(
+                            "Are you sure?",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          actions: [
+                            IconButton(
+                              icon: const Icon(
+                                Icons.cancel_outlined,
+                                color: Colors.red,
+                              ),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                            IconButton(
+                              icon: const Icon(
+                                Icons.done_outline_rounded,
+                                color: Colors.green,
+                              ),
+                              onPressed: () async {
+                                await authService.signOut();
+                                Navigator.of(context).pushAndRemoveUntil(
+                                    MaterialPageRoute(
+                                        builder: (context) => const LoginPage()),
+                                    (route) => false);
+                              },
+                            ),
+                          ],
+                        );
+                      }));
+                },
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 5,
+                ),
+                leading: const Icon(Icons.exit_to_app_rounded),
+                title: const Text(
+                  "Logout",
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
-              ],
-            ),
-          ],
+              ),
+            ],
+          ),
+        ),
+        body: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 170),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Icon(
+                Icons.account_circle,
+                size: 200,
+                color: Theme.of(context).primaryColor,
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "Full Name",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 17,
+                    ),
+                  ),
+                  Text(
+                    widget.userName,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 17,
+                    ),
+                  ),
+                ],
+              ),
+              const Divider(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "Email",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 17,
+                    ),
+                  ),
+                  Text(
+                    widget.email,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 17,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
